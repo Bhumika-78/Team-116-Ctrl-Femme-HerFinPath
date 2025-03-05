@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Opportunities</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function openInFirefox(url) {
+            window.open(url, '_blank');
+        }
+
+        // Function to change the theme color
+        function changeThemeColor(color) {
+            const body = document.body;
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+            const backButton = document.querySelector('.back-button');
+            const jobCards = document.querySelectorAll('.job-card');
+
+            // Update background and text colors
+            body.style.background = color;
+            header.style.background = `rgba(${hexToRgb(color)}, 0.9)`;
+            footer.style.background = `rgba(${hexToRgb(color)}, 0.8)`;
+            backButton.style.background = color;
+
+            // Update job card hover colors
+            jobCards.forEach(card => {
+                card.style.transition = 'background 0.3s, color 0.3s';
+                card.addEventListener('mouseenter', () => {
+                    card.style.background = color;
+                    card.style.color = '#fff';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.background = 'rgba(255, 255, 255, 0.95)';
+                    card.style.color = '#333';
+                });
+            });
+        }
+
+        // Helper function to convert hex to RGB
+        function hexToRgb(hex) {
+            hex = hex.replace('#', '');
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            return `${r}, ${g}, ${b}`;
+        }
+
+        // Function to toggle dark/light mode
+        function toggleDarkMode() {
+            const body = document.body;
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+            const backButton = document.querySelector('.back-button');
+            const jobCards = document.querySelectorAll('.job-card');
+            const themeToggle = document.getElementById('theme-toggle');
+
+            body.classList.toggle('dark-mode');
+            themeToggle.textContent = body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+
+            // Update colors based on mode
+            if (body.classList.contains('dark-mode')) {
+                body.style.background = '#1a1a1a';
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
+                footer.style.background = 'rgba(0, 0, 0, 0.9)';
+                backButton.style.background = '#ff6f61';
+                jobCards.forEach(card => {
+                    card.style.background = 'rgba(0, 0, 0, 0.8)';
+                    card.style.color = '#f0f0f0';
+                });
+            } else {
+                body.style.background = 'linear-gradient(135deg, #ff9a9e, #fad0c4)';
+                header.style.background = 'rgba(255, 255, 255, 0.9)';
+                footer.style.background = 'rgba(0, 0, 0, 0.8)';
+                backButton.style.background = '#ff6f61';
+                jobCards.forEach(card => {
+                    card.style.background = 'rgba(255, 255, 255, 0.95)';
+                    card.style.color = '#333';
+                });
+            }
+        }
+    </script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        body.dark-mode header {
+            background: rgba(0, 0, 0, 0.8);
+            color: #f0f0f0;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #ff6f61;
+        }
+
+        /* Back Button */
+        .back-button {
+            background: #ff6f61;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .back-button:hover {
+            background: #ff3b2f;
+            transform: scale(1.05);
+        }
+
+        /* Color Picker and Dark Mode Toggle */
+        .theme-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .theme-controls label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        body.dark-mode .theme-controls label {
+            color: #f0f0f0;
+        }
+
+        .theme-controls input[type="color"] {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #theme-toggle {
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        #theme-toggle:hover {
+            background: #555;
+            transform: scale(1.05);
+        }
+
+        body.dark-mode #theme-toggle {
+            background: #ff6f61;
+            color: white;
+        }
+
+        /* Job Container */
+        .job-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Job Card */
+        .job-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            cursor: pointer;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        body.dark-mode .job-card {
+            background: rgba(0, 0, 0, 0.8);
+            color: #f0f0f0;
+        }
+
+        .job-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .job-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .job-card h3 {
+            font-size: 1.5rem;
+            color: #ff6f61;
+            margin: 15px 0 10px;
+            transition: color 0.3s;
+        }
+
+        .job-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        body.dark-mode .job-card p {
+            color: #ccc;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Controls -->
+    <div class="theme-controls">
+        <label for="theme-color">Theme Color:</label>
+        <input type="color" id="theme-color" value="#ff6f61" onchange="changeThemeColor(this.value)">
+        <button id="theme-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </div>
+
+    <header>
+        <h1>Job Opportunities for Women 💼</h1>
+        <button class="back-button" onclick="window.location.href='index.html'">⬅ Back to Home</button>
+    </header>
+
+    <section class="job-container">
+        <div class="job-card" onclick="openInFirefox('https://www.upwork.com/')">
+            <img src="freelance.jpg" alt="Freelance Writing">
+            <h3>Freelance Writing</h3>
+            <p>Work remotely as a content writer.</p>
+        </div>
+        <div class="job-card" onclick="openInFirefox('https://www.fiverr.com/')">
+            <img src="graphic.jpg" alt="Graphic Designing">
+            <h3>Graphic Designing</h3>
+            <p>Earn money by designing logos & graphics.</p>
+        </div>
+        <div class="job-card" onclick="openInFirefox('https://www.naukri.com/')">
+            <img src="Teaching.jpg" alt="Teaching">
+            <h3>Teaching</h3>
+            <p>Online & offline teaching jobs available.</p>
+        </div>
+        <div class="job-card" onclick="openInFirefox('https://www.linkedin.com/jobs/')">
+            <img src="customer.jpg" alt="Customer Support">
+            <h3>Customer Support</h3>
+            <p>Remote and office-based customer support roles.</p>
+        </div>
+        <div class="job-card" onclick="openInFirefox('https://www.urbanclap.com/')">
+            <img src="beauty.jpg" alt="Beauty & Salon Services">
+            <h3>Beauty & Salon Services</h3>
+            <p>Work as a beautician through UrbanClap.</p>
+        </div>
+        <div class="job-card" onclick="openInFirefox('https://www.zomato.com/')">
+            <img src="catering.jpg" alt="Cooking & Catering">
+            <h3>Cooking & Catering</h3>
+            <p>Start a small food business with Zomato.</p>
+        </div>
+        <div class="job-card" onclick="openInFirefox('https://www.amazon.jobs/')">
+            <img src="warehouse.jpg" alt="Warehouse Jobs">
+            <h3>Warehouse Jobs</h3>
+            <p>Work in Amazon warehouses for packaging & logistics.</p>
+        </div>
+        <div class="job-card" onclick="openInFirefox('https://www.swiggy.com/')">
+            <img src="delivery.jpg" alt="Delivery Partner">
+            <h3>Delivery Partner</h3>
+            <p>Join Swiggy as a delivery executive.</p>
+        </div>
+        <div class="job-card" onclick="openInFirefox('https://www.handicraftindia.in/')">
+            <img src="embroidery.jpg" alt="Handicraft & Embroidery">
+            <h3>Handicraft & Embroidery</h3>
+            <p>Sell handmade products & earn from home.</p>
+        </div>
+        <div class="job-card" onclick="openInFirefox('https://www.angandwadi.com/')">
+            <img src="anganwadi.jpg" alt="Anganwadi Jobs">
+            <h3>Anganwadi Jobs</h3>
+            <p>Government jobs for women in child care.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Skill Development Hub. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
