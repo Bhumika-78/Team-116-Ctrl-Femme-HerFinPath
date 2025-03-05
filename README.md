@@ -1,2 +1,3 @@
 # Team-116-CtrlFemme_HerFinPath
-HACK WITH HER 4.O
+HerFinPath is a groundbreakin interactive web platform designed to uplift, educate and support women in all aspects of life with a strong focus on financial empowerment. By addressing the unique challenges women face in accessing financial resources, education and opportunities, this platform aims to create a long-term, transformative impact on women’s lives globally. Featuring inspiring stories , Griha Sakhi Section, JobBoard , AI Voice Assistant and Support forum.
+HerFinPath is not just a platform—it’s a movement toward financial equality, empowerment and economic growth of women worldwide.
