@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspirational Women Stories</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f8cdda, #1d2b64);
+            color: #222;
+            transition: background 0.3s, color 0.3s;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+            color: white;
+        }
+        .stories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .story-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: slideUp 1s ease-in-out;
+            cursor: pointer;
+            color: #333;
+        }
+        .story-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+        .story-card h2 {
+            color: #222;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        /* Back to Home Button */
+#back-home {
+    margin-top: 20px;
+    padding: 12px 25px;
+    cursor: pointer;
+    border: none;
+    background: #4CAF50; /* Green Color */
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Hover Effect */
+#back-home:hover {
+    background: #388E3C; /* Darker Green */
+    transform: scale(1.1);
+}
+
+       /*#theme-toggle {
+            margin-top: 10px;
+            padding: 12px 25px;
+            cursor: pointer;
+            border: none;
+            background: #ff4081;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        #theme-toggle:hover {
+            background: #e91e63;
+            transform: scale(1.1);
+        }*/
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Inspirational Stories of Women</h1>
+        <p>"Empowered women, empower the world."</p>
+        <!--<button id="theme-toggle">Toggle Theme</button>-->
+        <!-- Back to Home Button -->
+<button id="back-home" onclick="goHome()">Back to Home</button>
+
+    </header>
+    <main>
+        <section class="stories">
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Lakhimi_Baruah')">
+                <img src="" alt="Lakhimi Baruah">
+                <h2>Lakhimi Baruah</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Radhika_Gupta')">
+                <img src="" alt="Radhika Gupta">
+                <h2>Radhika Gupta</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Arundhati_Bhattacharya')">
+                <img src="" alt="Arundhati Bhattacharya">
+                <h2>Arundhati Bhattacharya</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Kalpana_Morparia')">
+                <img src="" alt="Kalpana Morparia">
+                <h2>Kalpana Morparia</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Naina_Lal_Kidwai')">
+                <img src="" alt="Naina Lal Kidwai">
+                <h2>Naina Lal Kidwai</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Chanda_Kochhar')">
+                <img src="" alt="Chanda Kochhar">
+                <h2>Chanda Kochhar</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Shikha_Sharma')">
+                <img src="" alt="Shikha Sharma">
+                <h2>Shikha Sharma</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Usha_Thorat')">
+                <img src="" alt="Usha Thorat">
+                <h2>Usha Thorat</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Alice_G._Vaidyan')">
+                <img src="" alt="Alice G. Vaidyan">
+                <h2>Alice G. Vaidyan</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Kaku_Nakhate')">
+                <img src="" alt="Kaku Nakhate">
+                <h2>Kaku Nakhate</h2>
+            </div>
+        </section>
+    </main>
+    <script>
+        function openInFirefox(url) {
+            window.open(url, '_blank');
+        }
+    function goHome() {
+        window.location.href = "index.html"; // Change this to your homepage URL if needed
+    }    </script>
+</body>
+</html>
