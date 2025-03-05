@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Women Empowerment Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://i.pinimg.com/originals/a2/3d/67/a23d6733cc9190d20204559e2e3d73bd.jpg') no-repeat center center/cover;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            opacity: 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        .button-box {
+            display: none;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        button {
+            padding: 12px 25px;
+            border: none;
+            background: #90767e;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #776a6d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="welcome-text">Hello, Welcome to <br> Women Empowerment Hub</h1>
+        <div class="button-box">
+            <button onclick="goToWebsite()">Let's Go</button>
+        </div>
+    </div>
+
+    <script>
+        gsap.to(".container", {opacity: 1, duration: 1.5});
+        gsap.to(".welcome-text", {opacity: 1, y: 0, duration: 1.5, delay: 0.5, ease: "power2.out"});
+        gsap.to(".button-box", {opacity: 1, y: 0, duration: 1.5, delay: 2, ease: "power2.out", display: "block"});
+        
+        function goToWebsite() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
