@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay It Forward - HerFinPath</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #f8cdda, #1d2b64);
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: #333;
+        }
+        h1, h2 {
+            color:#222;
+        }
+        input, select, button {
+            width: 90%;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #dddddd52;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background:#222;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background:#444;
+        }
+        .stories {
+            margin-top: 20px;
+        }
+        .story {
+            background: #fff0f6;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .back-home {
+            margin-top: 20px;
+            padding: 12px;
+            background: #ff4081;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .back-home:hover {
+            background: #e91e63;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 10px;
+        }
+        .footer a {
+            color: #ffcccb;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        // window.onload = function() {
+        //     alert("This is a demo website");
+        // };
+        
+        function handleDonation(event) {
+            event.preventDefault();
+            let amount = document.getElementById("amount").value;
+            let category = document.getElementById("category").value;
+            let customAmount = document.getElementById("customAmount").value;
+            
+            let donationAmount = amount === "custom" ? customAmount : amount;
+
+            if(donationAmount && donationAmount > 0) {
+                alert(`Thank you for donating ₹${donationAmount} towards ${category}! Your contribution is appreciated.`);
+                document.getElementById("donationForm").reset();
+                document.getElementById("customAmount").style.display = "none";
+            } else {
+                alert("Please enter a valid donation amount.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Pay It Forward</h1>
+    <a href="index.html" class="back-home">Back to Home</a>
+    
+    <div class="container">
+        <h2>Note: This is just a confirmation amount. If you're interested in making a real donation, please contact us at the number provided below.</h2>
+        <form id="donationForm" onsubmit="handleDonation(event)">
+            <select id="category">
+                <option value="Microloan">Fund a Microloan</option>
+                <option value="Scholarship">Sponsor a Scholarship</option>
+                <option value="Mentorship">Become a Mentor</option>
+            </select>
+            <select id="amount">
+                <option value="100">₹100</option>
+                <option value="200">₹200</option>
+                <option value="500">₹500</option>
+                <option value="1000">₹1000</option>
+                <option value="custom">Custom Amount</option>
+            </select>
+            <input type="number" id="customAmount" placeholder="Enter Amount (₹)" min="1" style="display:none;">
+            <button type="submit">Donate Now</button>
+        </form>
+    </div>
+    
+    <div class="container stories">
+        <h2>Inspiring Stories</h2>
+        <div class="story">
+            <p>There was a girl living in a slum area, facing many hardships in life. But one day, the team at "Her Hath Kalam" decided to reach out and help her. We recognized her potential, understood her dreams, and gave her the support she needed. We trained her, helped her prepare for a job, and today, she has a stable job of her own. Her life has transformed, and seeing this change fills our hearts with joy. Thanks to "Her Hath Kalam," she has reached her goals, and now she has the strength to chase her dreams.
+<br>"When someone receives real help, their dreams begin to come true. We only gave this girl an opportunity, but with her determination and hard work, she has changed the course of her life."</p>
+        </div>
+        
+    </div>
+
+    <!-- Contact Information -->
+    <div class="footer">
+        <p><strong>Contact Us:</strong></p>
+        <p>📞 <strong>Phone:</strong> +91 98765 43210</p>
+        <p>📧 <strong>Email:</strong> <a href="mailto:support@herfinpath.com">support@herfinpath.com</a></p>
+    </div>
+
+    <script>
+        document.getElementById("amount").addEventListener("change", function() {
+            let customAmountInput = document.getElementById("customAmount");
+            if (this.value === "custom") {
+                customAmountInput.style.display = "block";
+            } else {
+                customAmountInput.style.display = "none";
+                customAmountInput.value = "";
+            }
+        });
+    </script>
+</body>
+</html>
