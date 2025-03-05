@@ -1,256 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HerFinPath</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* General Styles */
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerFinPath</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+            overflow-x: hidden;
+        }
 
-    h1, h2, h3 {
-      color: #fff;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
+        /* Navigation Bar */
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    a {
-      text-decoration: none;
-      color: #fff;
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff6f61;
+            text-decoration: none;
+        }
 
-    /* Navbar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+        }
 
-    .navbar .logo {
-      font-size: 24px;
-      font-weight: 600;
-      color: #fff;
-    }
+        nav ul li {
+            display: inline;
+        }
 
-    .navbar .nav-links a {
-      margin: 0 15px;
-      font-size: 16px;
-      transition: color 0.3s ease;
-    }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s, transform 0.3s;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
 
-    .navbar .nav-links a:hover {
-      color: #ff6f61;
-    }
+        nav a:hover {
+            color: #ff6f61;
+            background: rgba(255, 111, 97, 0.1);
+            transform: translateY(-3px);
+        }
 
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: url('main.png') no-repeat center center/cover;
-      position: relative;
-    }
+        /* Hero Section (Full Page) */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            background: url('main.png') no-repeat center center/cover;
+            color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      
-    }
+        #hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
 
-    .hero h1 {
-      font-size: 4rem;
-      margin: 0;
-      animation: fadeIn 2s ease-in-out;
-    }
+        #hero p {
+            font-size: 1.5rem;
+            animation: fadeInUp 2s ease-in-out;
+        }
 
-    .hero p {
-      font-size: 1.5rem;
-      margin: 20px 0;
-      animation: slideUp 1.5s ease-in-out;
-      color: #ffffff; 
-    }
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
 
-    .hero .btn {
-      padding: 10px 20px;
-      background: #ff6f61;
-      border-radius: 25px;
-      font-size: 1rem;
-      transition: background 0.3s ease;
-    }
+        #hero * {
+            position: relative;
+            z-index: 2;
+        }
 
-    .hero .btn:hover {
-      background: #ff3b2f;
-    }
+        /* Features Section (Next Page) */
+        .features {
+            min-height: 100vh;
+            background: #fff;
+            padding: 60px 20px;
+            color: #333;
+        }
 
-    /* Features Section */
-    .features {
-      padding: 50px 20px;
-      background: #fff;
-      text-align: center;
-    }
+        .features h2 {
+            font-size: 2.5rem;
+            color: #ff6f61;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-in-out;
+        }
 
-    .features h2 {
-      font-size: 2.5rem;
-      color: #333;
-      margin-bottom: 40px;
-    }
+        .category-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    .feature-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
+        .category-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            color: #333;
+            animation: zoomIn 1.2s ease-in-out;
+        }
 
-    .feature-card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(15, 11, 231, 0.1);
-      width: 300px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
 
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
+        .category-card h3 {
+            font-size: 1.8rem;
+            color: #ff6f61;
+            margin-bottom: 15px;
+        }
 
-    .feature-card i {
-      font-size: 2rem;
-      color: #ff6f61;
-      margin-bottom: 10px;
-    }
+        .category-card p {
+            font-size: 1.1rem;
+            color: #555;
+        }
 
-    .feature-card h3 {
-      font-size: 1.5rem;
-      color: #333;
-      margin: 10px 0;
-    }
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.9);
+            color: #555;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .feature-card p {
-      font-size: 1rem;
-      color: #666666;
-    }
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
 
-    /* Toggle Section */
-    .toggle-section {
-      padding: 50px 20px;
-      background: #ff9a9e;
-      text-align: center;
-    }
+        /* Animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .toggle-btn {
-      padding: 10px 20px;
-      background: #ff6f61;
-      border: none;
-      border-radius: 25px;
-      color: #fff;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-    .toggle-btn:hover {
-      background: #ff3b2f;
-    }
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
 
-    .toggle-content {
-      display: none;
-      margin-top: 20px;
-      font-size: 1.2rem;
-      color: #333;
-    }
+        /* Interactive Button */
+        .cta-button {
+            background: #ff6f61;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+        }
 
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-  </style>
+        .cta-button:hover {
+            background: #ff3b2f;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <div class="navbar">
-    <div class="logo">HerFinPath</div>
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="stories">Stories</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#" class="logo">HerFinPath</a>
+        <ul>
+            <li><a href="index">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <div>
-      <h1>Empower. Educate. Elevate.</h1>
-      <p>Join us in building a brighter future for women worldwide.</p>
-      <a href="#features" class="btn">Explore Features</a>
-    </div>
-  </div>
+    <!-- Hero Section (Full Page) -->
+    <section id="hero">
+        <h2>Empower. Educate. Elevate.</h2>
+        <p>Join us in building a better future for women worldwide.</p>
+        <a href="#features" class="cta-button">Explore More</a>
+    </section>
 
-  <!-- Features Section -->
-  <div class="features" id="features">
-    <h2>Key Features</h2>
-    <div class="feature-cards">
-      <div class="feature-card">
-        <i class="fas fa-book"></i>
-        <h3>Inspiring Stories</h3>
-        <p>Learn from women leaders who broke barriers.</p>
-      </div>
-      <div class="feature-card">
-        <i class="fas fa-laptop-code"></i>
-        <h3>Skill Development</h3>
-        <p>Access free courses and mentorship programs.</p>
-      </div>
-      <div class="feature-card">
-        <i class="fas fa-briefcase"></i>
-        <h3>Job Board</h3>
-        <p>Find remote and freelance opportunities.</p>
-      </div>
-    </div>
-  </div>
+    <!-- Features Section (Next Page) -->
+    <section class="features" id="features">
+        <h2>Explore Our Features</h2>
+        <div class="category-container">
+            <div class="category-card" onclick="location.href='stories.html'">
+                <h3>📖 Inspiring Stories</h3>
+                <p>Read stories of successful women leaders.</p>
+            </div>
 
-  <!-- Toggle Section -->
-  <div class="toggle-section">
-    <button class="toggle-btn" onclick="toggleContent()">Click to Learn More</button>
-    <div class="toggle-content" id="toggleContent">
-      <p>We are dedicated to empowering women through financial independence and education.</p>
-        <p>This platform is not just a solution—it’s a movement toward a more equitable and empowered future for women worldwide.
-      </p>
-    </div>
-  </div>
+            <div class="category-card" onclick="location.href='skills.html'">
+                <h3>🎓 Skill Development</h3>
+                <p>Explore free courses and learning resources.</p>
+            </div>
 
-  <script>
-    // Toggle Effect
-    function toggleContent() {
-      const content = document.getElementById('toggleContent');
-      content.style.display = content.style.display === 'block' ? 'none' : 'block';
-    }
-  </script>
+            <div class="category-card" onclick="location.href='job.html'">
+                <h3>💼 Job Board</h3>
+                <p>Explore women-friendly job opportunities.</p>
+            </div>
+
+            <div class="category-card" onclick="location.href='homeManager.html'">
+                <h3>🏠 GrihaSakhi</h3>
+                <p>Empowering every home with smart management.</p>
+            </div>
+            <div class="category-card" onclick="location.href='pay.html'">
+                <h3>💸 Pay It Forward</h3>
+                <p>Spread kindness and make a difference!</p>
+            </div>
+
+            <div class="category-card" onclick="location.href='support.html'">
+                <h3>👩‍💬 Support Forum</h3>
+                <p>Join discussions and seek guidance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 HerFinPath All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Add smooth scrolling to all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
