@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrihaSakhi - Home Manager</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8cdda, #1d2b64);
+            text-align: center;
+            padding: 20px;
+            color: #333;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background: linear-gradient(135deg, #1d2b64, #000);
+            color: #fff;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+          
+            padding: 20px;
+        }
+        .box {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 1s ease-in-out;
+        }
+        body.dark-mode .box {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+        }
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #333;
+        }
+        body.dark-mode h2 {
+            color: #fff;
+        }
+        input, button, select {
+            width: 50%;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        button {
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #555;
+        }
+        .back-button {
+            background: white;
+            color: black;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .dark-mode .back-button {
+            background: #333;
+            color: #fff;
+        }
+        .back-button:hover {
+            background: #ddd;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #fff0f6;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        body.dark-mode li {
+            background: #333;
+            color: #fff;
+        }
+        li button {
+            background: #333;
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        
+
+        /* Notification styling */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GrihaSakhi - Home Manager</h1>
+        <button class="back-button" onclick="window.location.href='index.html'">⬅ Back to Home</button>
+    </header>
+    <div class="notification" id="notification">Feature added successfully!</div>
+    <div class="container">
+        
+        <!-- Grocery List -->
+        <div class="box">
+            <h2>Grocery List</h2>
+            <input type="text" id="groceryInput" placeholder="Enter item">
+            <button onclick="addGrocery()">Add</button>
+            <ul id="groceryList"></ul>
+        </div>
+
+        <!-- Task Manager -->
+        <div class="box">
+            <h2>Task Manager</h2>
+            <input type="text" id="taskInput" placeholder="Task Name">
+            <input type="date" id="taskDate">
+            <button onclick="addTask()">Add Task</button>
+            <ul id="taskList"></ul>
+        </div>
+
+        <!-- Notes -->
+        <div class="box">
+            <h2>Notes</h2>
+            <input type="text" id="noteInput" placeholder="Enter note">
+            <button onclick="addNote()">Add Note</button>
+            <ul id="noteList"></ul>
+        </div>
+
+        <!-- Expense Tracker -->
+        <div class="box">
+            <h2>Expense Tracker</h2>
+            <input type="number" id="expenseAmount" placeholder="Amount">
+            <select id="expenseCategory">
+                <option value="Groceries">Groceries</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Other">Other</option>
+            </select>
+            <button onclick="addExpense()">Add</button>
+            <ul id="expenseList"></ul>
+            <p><strong>Total Expense:</strong> <span id="totalExpense">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadSavedData();
+        });
+
+        // Grocery List
+        function addGrocery() {
+            let input = document.getElementById("groceryInput");
+            if (input.value.trim() === "") return;
+            let list = document.getElementById("groceryList");
+            let li = document.createElement("li");
+            li.innerHTML = `${input.value} <button onclick="removeItem(this)">❌</button>`;
+            list.appendChild(li);
+            input.value = "";
+            saveGroceryData();
+        }
+
+        // Task Manager
+        function addTask() {
+            let taskInput = document.getElementById("taskInput");
+            let taskDate = document.getElementById("taskDate");
+            if (taskInput.value.trim() === "" || taskDate.value === "") return;
+            let list = document.getElementById("taskList");
+            let li = document.createElement("li");
+            li.innerHTML = `${taskInput.value} (Due: ${taskDate.value}) <button onclick="removeItem(this)">❌</button>`;
+            list.appendChild(li);
+            taskInput.value = "";
+            taskDate.value = "";
+            saveTaskData();
+        }
+
+        // Notes
+        function addNote() {
+            let noteInput = document.getElementById("noteInput");
+            if (noteInput.value.trim() === "") return;
+            let list = document.getElementById("noteList");
+            let li = document.createElement("li");
+            li.innerHTML = `${noteInput.value} <button onclick="removeItem(this)">❌</button>`;
+            list.appendChild(li);
+            noteInput.value = "";
+            saveNoteData();
+        }
+
+        // Expense Tracker
+        function addExpense() {
+            let amount = document.getElementById("expenseAmount");
+            let category = document.getElementById("expenseCategory").value;
+            if (amount.value.trim() === "") return;
+            let list = document.getElementById("expenseList");
+            let li = document.createElement("li");
+            li.innerHTML = `${amount.value} (${category}) <button onclick="removeItem(this)">❌</button>`;
+            list.appendChild(li);
+            updateTotalExpense();
+            saveExpenseData();
+        }
+
+        // Common function to remove items (Grocery, Task, Note, Expense)
+        function removeItem(button) {
+            let listItem = button.parentElement;
+            listItem.remove();
+            saveAllData();
+        }
+
+        // Update total expenses
+        function updateTotalExpense() {
+            let total = 0;
+            document.querySelectorAll("#expenseList li").forEach(item => {
+                let amount = item.innerHTML.split(" ")[0];
+                total += parseFloat(amount);
+            });
+            document.getElementById("totalExpense").textContent = total;
+        }
+
+        // Save data to localStorage
+        function saveGroceryData() {
+            localStorage.setItem("groceryList", document.getElementById("groceryList").innerHTML);
+        }
+
+        function saveTaskData() {
+            localStorage.setItem("taskList", document.getElementById("taskList").innerHTML);
+        }
+
+        function saveNoteData() {
+            localStorage.setItem("noteList", document.getElementById("noteList").innerHTML);
+        }
+
+        function saveExpenseData() {
+            localStorage.setItem("expenseList", document.getElementById("expenseList").innerHTML);
+            localStorage.setItem("totalExpense", document.getElementById("totalExpense").textContent);
+        }
+
+        // Save all data together
+        function saveAllData() {
+            saveGroceryData();
+            saveTaskData();
+            saveNoteData();
+            saveExpenseData();
+        }
+
+        // Load data from localStorage
+        function loadSavedData() {
+            if (localStorage.getItem("groceryList")) {
+                document.getElementById("groceryList").innerHTML = localStorage.getItem("groceryList");
+            }
+            if (localStorage.getItem("taskList")) {
+                document.getElementById("taskList").innerHTML = localStorage.getItem("taskList");
+            }
+            if (localStorage.getItem("noteList")) {
+                document.getElementById("noteList").innerHTML = localStorage.getItem("noteList");
+            }
+            if (localStorage.getItem("expenseList")) {
+                document.getElementById("expenseList").innerHTML = localStorage.getItem("expenseList");
+            }
+            if (localStorage.getItem("totalExpense")) {
+                document.getElementById("totalExpense").textContent = localStorage.getItem("totalExpense");
+            }
+        }
+
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            saveAllData();  // Save data to localStorage on mode toggle
+        }
+    </script>
+</body>
+</html>
