@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Forum</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f8cdda, #1d2b64);
+            color: #222;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .back-button {
+            background: white;
+            color: black;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .forum-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .forum-post {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 60%;
+            margin-bottom: 15px;
+            position: relative;
+            text-align: left;
+        }
+        .comment-btn, .edit-btn, .delete-btn {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        .edit-btn {
+            background: #2196F3;
+        }
+        .delete-btn {
+            background: #f44336;
+        }
+        textarea {
+            width: 60%;
+            height: 60px;
+            margin-top: 10px;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        #questions-container {
+            width: 60%;
+            max-height: 300px; /* Scrollable comments section */
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Support Forum 💬</h1>
+        <button class="back-button" onclick="window.location.href='index.html'">⬅ Back to Home</button>
+    </header>
+    <section class="forum-container">
+        <h2>Ask a Question</h2>
+        <textarea id="question-input" placeholder="Type your question..."></textarea>
+        <button class="comment-btn" onclick="postQuestion()">Post</button>
+
+        <div id="questions-container"></div> <!-- Questions yahan show hongi -->
+    </section>
+    <footer>
+        <p>&copy; 2025 Support Forum. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", loadQuestions);
+
+        function postQuestion() {
+            const questionInput = document.getElementById("question-input");
+            const questionText = questionInput.value.trim();
+
+            if (questionText === "") {
+                alert("Please enter a valid question!");
+                return;
+            }
+
+            // Create a new question object
+            const questionObj = { text: questionText };
+            let questions = JSON.parse(localStorage.getItem("questions")) || [];
+            questions.push(questionObj);
+            localStorage.setItem("questions", JSON.stringify(questions));
+
+            renderQuestions();
+            questionInput.value = "";
+        }
+
+        function renderQuestions() {
+            const questionsContainer = document.getElementById("questions-container");
+            questionsContainer.innerHTML = "";
+
+            let questions = JSON.parse(localStorage.getItem("questions")) || [];
+
+            questions.forEach((questionObj, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.classList.add("forum-post");
+
+                const questionPara = document.createElement("p");
+                questionPara.textContent = questionObj.text;
+
+                // Edit button
+                const editButton = document.createElement("button");
+                editButton.textContent = "Edit";
+                editButton.classList.add("edit-btn");
+                editButton.onclick = function() {
+                    const newQuestion = prompt("Edit your question:", questionPara.textContent);
+                    if (newQuestion !== null && newQuestion.trim() !== "") {
+                        questions[index].text = newQuestion;
+                        localStorage.setItem("questions", JSON.stringify(questions));
+                        renderQuestions();
+                    }
+                };
+
+                // Delete button
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.classList.add("delete-btn");
+                deleteButton.onclick = function() {
+                    questions.splice(index, 1);
+                    localStorage.setItem("questions", JSON.stringify(questions));
+                    renderQuestions();
+                };
+
+                // Append everything
+                questionDiv.appendChild(questionPara);
+                questionDiv.appendChild(editButton);
+                questionDiv.appendChild(deleteButton);
+                questionsContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadQuestions() {
+            renderQuestions();
+        }
+    </script>
+</body>
+</html>
