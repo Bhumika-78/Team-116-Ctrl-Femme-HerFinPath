@@ -7,20 +7,32 @@
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
     <style>
+        /* Light Theme (Default) */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
-            background: linear-gradient(135deg, #f8cdda, #1d2b64);
-            color: #222;
-            transition: background 0.3s, color 0.3s;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+            transition: background 0.5s, color 0.5s;
         }
         header {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
             animation: fadeIn 1s ease-in-out;
-            color: white;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #ff6f61;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0;
+            color: #555;
         }
         .stories {
             display: flex;
@@ -30,122 +42,267 @@
             padding: 20px;
         }
         .story-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
             background: rgba(255, 255, 255, 0.95);
             padding: 15px;
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             width: 300px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.5s, color 0.5s;
             animation: slideUp 1s ease-in-out;
             cursor: pointer;
             color: #333;
         }
         .story-card:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
         .story-card h2 {
-            color: #222;
+            margin: 10px 0;
+            color: #ff6f61;
         }
         img {
             width: 100%;
+            height: 200px;
+            object-fit: cover;
             border-radius: 10px;
         }
         /* Back to Home Button */
-#back-home {
-    margin-top: 20px;
-    padding: 12px 25px;
-    cursor: pointer;
-    border: none;
-    background: #4CAF50; /* Green Color */
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-    transition: background 0.3s, transform 0.2s;
-}
-
-/* Hover Effect */
-#back-home:hover {
-    background: #388E3C; /* Darker Green */
-    transform: scale(1.1);
-}
-
-       /*#theme-toggle {
-            margin-top: 10px;
+        #back-home {
+            margin-top: 20px;
             padding: 12px 25px;
             cursor: pointer;
             border: none;
-            background: #ff4081;
+            background: #ff6f61;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        #back-home:hover {
+            background: #ff3b2f;
+            transform: scale(1.1);
+        }
+        /* Dark Mode Toggle Button */
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background: #333;
             color: white;
             font-weight: bold;
             border-radius: 8px;
             transition: background 0.3s, transform 0.2s;
         }
         #theme-toggle:hover {
-            background: #e91e63;
+            background: #555;
             transform: scale(1.1);
-        }*/
+        }
+        /* Color Picker */
+        .color-picker {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .color-picker label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .color-picker input[type="color"] {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            outline: none;
+        }
+        /* Dark Theme */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            color: #f0f0f0;
+        }
+        body.dark-mode header {
+            background: rgba(0, 0, 0, 0.8);
+            color: #f0f0f0;
+        }
+        body.dark-mode header h1 {
+            color: #ff6f61;
+        }
+        body.dark-mode header p {
+            color: #ccc;
+        }
+        body.dark-mode .story-card {
+            background: rgba(0, 0, 0, 0.8);
+            color: #f0f0f0;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+        body.dark-mode .story-card h2 {
+            color: #ff6f61;
+        }
+        body.dark-mode #back-home {
+            background: #ff6f61;
+            color: white;
+        }
+        body.dark-mode #theme-toggle {
+            background: #ff6f61;
+            color: white;
+        }
+        body.dark-mode #theme-toggle:hover {
+            background: #ff3b2f;
+        }
+        body.dark-mode .color-picker label {
+            color: #f0f0f0;
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ff9a9e);
+            background-size: 200% 200%;
+            animation: gradientBG 10s ease infinite;
+        }
     </style>
 </head>
 <body>
+    <!-- Dark Mode Toggle Button -->
+    <button id="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+
+    <!-- Color Picker -->
+    <div class="color-picker">
+        <label for="theme-color">Theme Color:</label>
+        <input type="color" id="theme-color" value="#ff6f61" onchange="changeThemeColor(this.value)">
+    </div>
+
     <header>
         <h1>Inspirational Stories of Women</h1>
         <p>"Empowered women, empower the world."</p>
-        <!--<button id="theme-toggle">Toggle Theme</button>-->
         <!-- Back to Home Button -->
-<button id="back-home" onclick="goHome()">Back to Home</button>
-
+        <button id="back-home" onclick="goHome()">Back to Home</button>
     </header>
     <main>
         <section class="stories">
-            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Lakhimi_Baruah')">
-                <img src="" alt="Lakhimi Baruah">
-                <h2>Lakhimi Baruah</h2>
+            <div class="story-card" onclick="openInFirefox('https://ardorcomm-media.com/speaker/dr-madhu-chitkara-2/')">
+                <img src="madhuchitkara.jpeg" alt="Dr. Madhu Chitkara">
+                <h2>Dr. Madhu Chitkara</h2>
             </div>
-            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Radhika_Gupta')">
-                <img src="" alt="Radhika Gupta">
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Melinda_French_Gates')">
+                <img src="melindagates.jpeg" alt="Melinda Gates">
+                <h2>MELINDA GATES</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Falguni_Nayar')">
+                <img src="falguni.jpeg" alt="Falguni Nayar">
+                <h2>Falguni Nayar</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Arunima_Sinha')">
+                <img src="ArunimaSinha.png" alt="Arunima Sinha">
+                <h2>Arunima Sinha</h2>
+            </div>
+            <div class="story-card" onclick="openInFirefox('https://yourdost.com/blog/2024/02/radhika-owning-your-narrative.html?q=/blog/2024/02/radhika-owning-your-narrative.html&')">
+                <img src="radhika.jpg" alt="Radhika Gupta">
                 <h2>Radhika Gupta</h2>
             </div>
-            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Arundhati_Bhattacharya')">
-                <img src="" alt="Arundhati Bhattacharya">
-                <h2>Arundhati Bhattacharya</h2>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Indra_Nooyi')">
+                <img src="indraNooyi.webp" alt="Indra Nooyi">
+                <h2>Indra Nooyi</h2>
             </div>
-            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Kalpana_Morparia')">
-                <img src="" alt="Kalpana Morparia">
-                <h2>Kalpana Morparia</h2>
-            </div>
-            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Naina_Lal_Kidwai')">
-                <img src="" alt="Naina Lal Kidwai">
-                <h2>Naina Lal Kidwai</h2>
-            </div>
-            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Chanda_Kochhar')">
-                <img src="" alt="Chanda Kochhar">
-                <h2>Chanda Kochhar</h2>
-            </div>
-            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Shikha_Sharma')">
-                <img src="" alt="Shikha Sharma">
-                <h2>Shikha Sharma</h2>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Sudha_Murty')">
+                <img src="sudhaMurthy.jpeg" alt="Sudha Murthy">
+                <h2>Sudha Murthy</h2>
             </div>
             <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Usha_Thorat')">
-                <img src="" alt="Usha Thorat">
+                <img src="usha.jpg" alt="Usha Thorat">
                 <h2>Usha Thorat</h2>
             </div>
             <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Alice_G._Vaidyan')">
-                <img src="" alt="Alice G. Vaidyan">
+                <img src="alice.jpg" alt="Alice G. Vaidyan">
                 <h2>Alice G. Vaidyan</h2>
             </div>
-            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Kaku_Nakhate')">
-                <img src="" alt="Kaku Nakhate">
-                <h2>Kaku Nakhate</h2>
+            <div class="story-card" onclick="openInFirefox('https://en.wikipedia.org/wiki/Vandana_Luthra')">
+                <img src="vandana.jpeg" alt="Vandana Luthra">
+                <h2>Vandana Luthra</h2>
             </div>
         </section>
     </main>
     <script>
+        // Function to toggle dark mode
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.getElementById('theme-toggle');
+            body.classList.toggle('dark-mode');
+
+            // Change button text based on mode
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.textContent = '☀️ Light Mode';
+            } else {
+                themeToggle.textContent = '🌙 Dark Mode';
+            }
+        }
+
+        // Function to change the theme color
+        function changeThemeColor(color) {
+            const body = document.body;
+            const header = document.querySelector('header');
+            const backButton = document.querySelector('#back-home');
+            const storyCards = document.querySelectorAll('.story-card');
+
+            // Update background and text colors
+            body.style.background = color;
+            header.style.background = `rgba(${hexToRgb(color)}, 0.9)`;
+            backButton.style.background = color;
+
+            // Update story card hover colors
+            storyCards.forEach(card => {
+                card.style.transition = 'background 0.3s, color 0.3s';
+                card.addEventListener('mouseenter', () => {
+                    card.style.background = color;
+                    card.style.color = '#fff';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.background = 'rgba(255, 255, 255, 0.95)';
+                    card.style.color = '#333';
+                });
+            });
+        }
+
+        // Helper function to convert hex to RGB
+        function hexToRgb(hex) {
+            hex = hex.replace('#', '');
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            return `${r}, ${g}, ${b}`;
+        }
+
+        // Open links in a new tab
         function openInFirefox(url) {
             window.open(url, '_blank');
         }
-    function goHome() {
-        window.location.href = "index.html"; // Change this to your homepage URL if needed
-    }    </script>
+
+        // Go back to home
+        function goHome() {
+            window.location.href = "index.html"; // Change this to your homepage URL if needed
+        }
+    </script>
 </body>
 </html>
